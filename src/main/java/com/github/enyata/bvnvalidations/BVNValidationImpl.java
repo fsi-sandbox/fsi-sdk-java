@@ -1,8 +1,8 @@
-package com.fsi.sandbox.bvnValidations;
+package com.github.enyata.bvnvalidations;
 
-import com.fsi.sandbox.exceptions.BadRemoteResponseException;
-import com.fsi.sandbox.util.StringUtils;
-import com.fsi.sandbox.vo.*;
+import com.github.enyata.exceptions.BadRemoteResponseException;
+import com.github.enyata.util.StringUtils;
+import com.github.enyata.vo.ResetCredential;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;

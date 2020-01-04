@@ -1,4 +1,4 @@
-package com.fsi.sandbox.vo;
+package com.github.enyata.vo;
 
 
 import org.springframework.context.annotation.Configuration;

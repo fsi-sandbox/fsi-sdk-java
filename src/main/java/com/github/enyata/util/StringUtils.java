@@ -1,4 +1,4 @@
-package com.fsi.sandbox.util;
+package com.github.enyata.util;
 
 import java.math.BigInteger;
 import java.util.Objects;

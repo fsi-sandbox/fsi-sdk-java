@@ -8,8 +8,8 @@
 		<version>2.2.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.fsi.sandbox</groupId>
-	<artifactId>nibss-interfaces</artifactId>
+	<groupId>com.github.enyata</groupId>
+	<artifactId>fsi-nibss-interface</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>nibss-interfaces</name>
 	<description>BVN validation library for exposed Interfaces by NIBSS on the FSI Sandbox</description>

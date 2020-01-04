@@ -1,4 +1,4 @@
-package com.fsi.sandbox.exceptions;
+package com.github.enyata.exceptions;
 
 public class BadRemoteResponseException extends Exception {
 

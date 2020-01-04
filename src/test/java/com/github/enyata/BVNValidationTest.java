@@ -1,9 +1,9 @@
-package com.fsi.sandbox;
+package com.github.enyata;
 
 
-import com.fsi.sandbox.bvnValidations.BVNValidationImpl;
-import com.fsi.sandbox.exceptions.BadRemoteResponseException;
-import com.fsi.sandbox.vo.ResetCredential;
+import com.github.enyata.bvnvalidations.BVNValidationImpl;
+import com.github.enyata.exceptions.BadRemoteResponseException;
+import com.github.enyata.vo.ResetCredential;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Assert;
 import org.junit.Test;
