@@ -8,10 +8,10 @@
 		<version>2.2.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.fsi</groupId>
-	<artifactId>nibss-bvn-validations</artifactId>
+	<groupId>com.fsi.sandbox</groupId>
+	<artifactId>nibss-interfaces</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>nibss-bvn-validations</name>
+	<name>nibss-interfaces</name>
 	<description>BVN validation library for exposed Interfaces by NIBSS on the FSI Sandbox</description>
 
 	<properties>
@@ -23,18 +23,21 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.13</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
+
 	</dependencies>
 
 	<build>
