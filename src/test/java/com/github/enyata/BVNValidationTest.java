@@ -1,8 +1,9 @@
 package com.github.enyata;
 
 
-import com.github.enyata.bvnvalidations.BVNValidationImpl;
+import com.github.enyata.bvnvalidations.BVNValidation;
 import com.github.enyata.exceptions.BadRemoteResponseException;
+import com.github.enyata.exceptions.EncryptionException;
 import com.github.enyata.vo.ResetCredential;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Assert;
@@ -22,7 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class BVNValidationTest {
 
     @Autowired
-    private BVNValidationImpl bvnValidationService;
+    private BVNValidation bvnValidationService;
 
     @Test(expected = IllegalArgumentException.class)
     public void testResetHeadersEmptySecretKey(){
@@ -137,7 +138,32 @@ public class BVNValidationTest {
         Assert.assertEquals("IVKey", credential.getIvKey());
         Assert.assertEquals("PASSWORD", credential.getPassword());
 
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testGenerateAuthHeadersNoSandBoxKey() throws  EncryptionException {
+         bvnValidationService.generateHttpAuthHeaders("", "123", "123");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGenerateAuthHeadersNoPassword() throws  EncryptionException {
+        bvnValidationService.generateHttpAuthHeaders("123", "", "123");
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testGenerateAuthHeadersNoCode() throws  EncryptionException {
+        bvnValidationService.generateHttpAuthHeaders("1223", "123", null);
+    }
+
+    @Test
+    public void testGenerateAuthHeadersSuccess() throws  EncryptionException {
+        HttpHeaders headers =  bvnValidationService.generateHttpAuthHeaders("1223", "123", "123");
+        Assert.assertEquals("MTIz", headers.get("OrganisationCode").get(0));
+        Assert.assertEquals("1223", headers.get("Sandbox-Key").get(0));
+        Assert.assertEquals("MTIzOjEyMw==", headers.get("Authorization").get(0));
+
+        Assert.assertEquals("SHA256", headers.get("SIGNATURE_METH").get(0));
+        Assert.assertEquals("application/json", headers.get("Content-Type").get(0));
+        Assert.assertEquals("application/json", headers.get("Accept").get(0));
 
     }
 }
