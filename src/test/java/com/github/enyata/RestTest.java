@@ -47,7 +47,8 @@ public class RestTest {
         Assert.assertNotNull(response.getData().getLastName());
         Assert.assertNotNull(response.getData().getEnrollmentBranch());
         Assert.assertNotNull(response.getData().getMiddleName());
-        Assert.assertNotNull(response.getData().getPhoneNumber());
+        Assert.assertNotNull(response.getData().getPhoneNumber1());
+        Assert.assertNotNull(response.getData().getPhoneNumber2());
         Assert.assertNotNull(response.getData().getRegistrationDate());
         Assert.assertNotNull(response.getData().getResponseCode());
         Assert.assertNotNull(response.getData().getWatchListed());
@@ -70,9 +71,11 @@ public class RestTest {
         Assert.assertNotNull(response.getData().getLastName());
         Assert.assertNotNull(response.getData().getEnrollmentBranch());
         Assert.assertNotNull(response.getData().getMiddleName());
-        Assert.assertNotNull(response.getData().getPhoneNumber());
+        Assert.assertNotNull(response.getData().getPhoneNumber1());
+        Assert.assertNotNull(response.getData().getPhoneNumber2());
         Assert.assertNotNull(response.getData().getRegistrationDate());
         Assert.assertNotNull(response.getData().getResponseCode());
         Assert.assertNotNull(response.getData().getWatchListed());
     }
+
 }

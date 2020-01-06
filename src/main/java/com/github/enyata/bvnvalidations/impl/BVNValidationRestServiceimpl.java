@@ -86,9 +86,8 @@ public class BVNValidationRestServiceimpl implements BVNValidationRestService {
 
         //else you can call the securityConfiguration.encrypt(bvnRequestString, credential.getAesKey(), credential.getIvKey()) method
         HttpEntity<String> entity = new HttpEntity<>(encryptedHex, headers);
-        ResponseEntity<String> responseEntity;
 
-        responseEntity =  restTemplate.exchange(getSingleBVNUrl, HttpMethod.POST, entity, String.class);
+        ResponseEntity<String> responseEntity =  restTemplate.exchange(getSingleBVNUrl, HttpMethod.POST, entity, String.class);
         String responseBody = responseEntity.getBody();
 
 
@@ -111,8 +110,7 @@ public class BVNValidationRestServiceimpl implements BVNValidationRestService {
 
         //else you can call the securityConfiguration.encrypt(bvnRequestString, credential.getAesKey(), credential.getIvKey()) method
         HttpEntity<String> entity = new HttpEntity<>(encryptedHex, headers);
-        ResponseEntity<String> responseEntity;
-        responseEntity =  restTemplate.exchange(getSingleBVNUrl, HttpMethod.POST, entity, String.class);
+        ResponseEntity<String> responseEntity =  restTemplate.exchange(getSingleBVNUrl, HttpMethod.POST, entity, String.class);
         String responseBody = responseEntity.getBody();
 
         //else you can call the securityConfiguration.decrypt(bvnRequestString, credential.getAesKey(), credential.getIvKey()) method

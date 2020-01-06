@@ -1,6 +1,7 @@
 package com.github.enyata.config;
 
 
+import com.github.enyata.aspect.Log;
 import com.github.enyata.exceptions.EncryptionException;
 import com.github.enyata.util.StringUtils;
 import com.github.enyata.vo.ResetCredential;
@@ -26,14 +27,15 @@ public class SecurityConfiguration {
      * This method encrypts data passed to it with the existing EncryptionCiphers
      * which was earlier set by calling the setEncryptionCiphers method.
      * You need to call the setEncryptionCiphers at least once for it to work.
-     * @param stringToEncrypt
-     * @return Returns the encrypted value
+     * @param input
+     * @return Returns the input value
      * @throws EncryptionException
      */
-    public  String encrypt(String stringToEncrypt) throws EncryptionException {
-        if (!StringUtils.isBlank(stringToEncrypt) && cipherEncrypt != null) {
+    @Log
+    public  String encrypt(String input) throws EncryptionException {
+        if (!StringUtils.isBlank(input) && cipherEncrypt != null) {
             try {
-                byte[] encrypted = cipherEncrypt.doFinal(stringToEncrypt.getBytes());
+                byte[] encrypted = cipherEncrypt.doFinal(input.getBytes());
                 return StringUtils.bytesToHex(encrypted);
             } catch ( IllegalBlockSizeException | BadPaddingException e) {
                 throw new EncryptionException("Error occurred encrypting details" , e);
@@ -47,15 +49,16 @@ public class SecurityConfiguration {
     /**
      * This method encrypt data passed. It creates new Cipher every time the method is called.
      * The cipher is not reused.
-     * @param stringToEncrypt
+     * @param input
      * @param encryptionKey
      * @param ivKey
      * @return
      * @throws EncryptionException
      */
-    public  String encrypt(String stringToEncrypt, String encryptionKey, String ivKey) throws EncryptionException {
+    @Log
+    public  String encrypt(String input, String encryptionKey, String ivKey) throws EncryptionException {
 
-        if (StringUtils.isBlank(stringToEncrypt)) {
+        if (StringUtils.isBlank(input)) {
             throw new EncryptionException("Error occurred encrypting. Trying to encrypt null value");
         }
 
@@ -69,7 +72,7 @@ public class SecurityConfiguration {
 
             Cipher cipherEncrypt = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipherEncrypt.init(Cipher.ENCRYPT_MODE, encryptionSpec, ivKeySpec);
-            byte[] encrypted = cipherEncrypt.doFinal(stringToEncrypt.getBytes());
+            byte[] encrypted = cipherEncrypt.doFinal(input.getBytes());
             return StringUtils.bytesToHex(encrypted);
         } catch (IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
             throw new EncryptionException("Error occurred encrypting details" , e);
@@ -80,14 +83,15 @@ public class SecurityConfiguration {
     /**
      * This method encrypt data passed. It creates new Ciphers every time the method is called.
      * The ciphers are not reused.
-     * @param encrypted
+     * @param input
      * @param encryptionKey
      * @param ivKey
      * @return decryped string
      * @throws EncryptionException
      */
-    public String decrypt(String encrypted, String encryptionKey, String ivKey) throws EncryptionException {
-        if (StringUtils.isBlank(encrypted)) {
+    @Log
+    public String decrypt(String input, String encryptionKey, String ivKey) throws EncryptionException {
+        if (StringUtils.isBlank(input)) {
             throw new EncryptionException("Error occurred encrypting. Trying to encrypt null or empty value");
         }
 
@@ -100,7 +104,7 @@ public class SecurityConfiguration {
             IvParameterSpec ivKeySpec = new IvParameterSpec(ivKey.getBytes("UTF-8"));
             cipherDecrypt = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             cipherDecrypt.init(Cipher.DECRYPT_MODE, encryptionSpec, ivKeySpec);
-            byte[] original = cipherDecrypt.doFinal(StringUtils.hexStringToByteArray(encrypted));
+            byte[] original = cipherDecrypt.doFinal(StringUtils.hexStringToByteArray(input));
             return new String(original);
         } catch (IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
             throw new EncryptionException("Error occurred decrypting details" , e);
@@ -112,14 +116,15 @@ public class SecurityConfiguration {
      * This method encrypts data passed to it with the existing DecryptionCipher
      * which was earlier set by calling the setEncryptionCiphers method.
      * You need to call the setEncryptionCiphers at least once for it to work.
-     * @param encrypted
-     * @return Returns the encrypted value
+     * @param input
+     * @return Returns the input value
      * @throws EncryptionException
      */
-    public String decrypt(String encrypted) throws EncryptionException {
-        if (!StringUtils.isBlank(encrypted) && cipherDecrypt != null) {
+    @Log
+    public String decrypt(String input) throws EncryptionException {
+        if (!StringUtils.isBlank(input) && cipherDecrypt != null) {
             try {
-                byte[] original = cipherDecrypt.doFinal(StringUtils.hexStringToByteArray(encrypted));
+                byte[] original = cipherDecrypt.doFinal(StringUtils.hexStringToByteArray(input));
                 return new String(original);
             } catch ( IllegalBlockSizeException | BadPaddingException e) {
                 throw new EncryptionException("Error occurred decrypting details" , e);
@@ -135,12 +140,13 @@ public class SecurityConfiguration {
      * @return byte array
      * @throws EncryptionException
      */
-    public byte[] encryptWithoutIV(String input) throws EncryptionException {
+    @Log
+    public String encryptWithoutIV(String input) throws EncryptionException {
 
         if (!StringUtils.isBlank(input)) {
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA-256");
-                return md.digest(input.getBytes());
+                return StringUtils.toHexString((md.digest(input.getBytes())));
             } catch ( NoSuchAlgorithmException e) {
                 throw new EncryptionException("Error occurred encryption input" , e);
             }
@@ -155,6 +161,7 @@ public class SecurityConfiguration {
      * @param resetCredential
      * @throws EncryptionException
      */
+
     private void setEncryptionCiphers(ResetCredential resetCredential) throws EncryptionException {
 
         if (resetCredential == null || StringUtils.isBlank(resetCredential.getAesKey()) || StringUtils.isBlank(resetCredential.getIvKey())) {

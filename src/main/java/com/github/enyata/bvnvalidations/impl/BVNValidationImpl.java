@@ -75,10 +75,7 @@ public class BVNValidationImpl implements BVNValidation {
         httpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         httpHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         httpHeaders.set(HttpHeaders.AUTHORIZATION, authHeader);
-
-
-        byte[] sigByte = securityConfiguration.encryptWithoutIV(signatureString);
-        httpHeaders.set("SIGNATURE", StringUtils.toHexString(sigByte));
+        httpHeaders.set("SIGNATURE", securityConfiguration.encryptWithoutIV(signatureString));
         httpHeaders.set("OrganisationCode", Base64.encodeBase64String(username.getBytes()));
         httpHeaders.set("SIGNATURE_METH", signatureMethodHeader);
         httpHeaders.set("Sandbox-Key", sandBoxKey);

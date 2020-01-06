@@ -12,9 +12,7 @@ public class BVNDetail {
     private String firstName;
     private String middleName;
     private String lastName;
-
     private String dateOfBirth;
-    private String phoneNumber;
     private String registrationDate;
     private String enrollmentBank;
     private String enrollmentBranch;
@@ -73,15 +71,6 @@ public class BVNDetail {
     @JsonProperty("DateOfBirth")
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    @JsonProperty("PhoneNumber1")
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getRegistrationDate() {

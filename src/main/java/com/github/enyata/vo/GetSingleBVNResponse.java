@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetSingleBVNResponse {
     private String message;
-    private BVNDetail data;
+    private FullBVNDetail data;
 
     public String getMessage() {
         return message;
@@ -17,11 +17,11 @@ public class GetSingleBVNResponse {
         this.message = message;
     }
 
-    public BVNDetail getData() {
+    public FullBVNDetail getData() {
         return data;
     }
 
-    public void setData(BVNDetail data) {
+    public void setData(FullBVNDetail data) {
         this.data = data;
     }
 }
