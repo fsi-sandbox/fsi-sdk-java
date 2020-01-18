@@ -12,11 +12,14 @@ public class BVNDetail {
     private String firstName;
     private String middleName;
     private String lastName;
+    private String category;
     private String dateOfBirth;
+    private String phoneNumber;
     private String registrationDate;
     private String enrollmentBank;
     private String enrollmentBranch;
     private String watchListed;
+    private String bankCode;
 
     public String getResponseCode() {
         return responseCode;
@@ -73,6 +76,15 @@ public class BVNDetail {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    @JsonProperty("PhoneNumber")
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getRegistrationDate() {
         return registrationDate;
     }
@@ -108,5 +120,23 @@ public class BVNDetail {
     @JsonProperty("WatchListed")
     public void setWatchListed(String watchListed) {
         this.watchListed = watchListed;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    @JsonProperty("Category")
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getBankCode() {
+        return bankCode;
+    }
+
+    @JsonProperty("BankCode")
+    public void setBankCode(String bankCode) {
+        this.bankCode = bankCode;
     }
 }

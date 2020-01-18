@@ -33,9 +33,9 @@ public class LogAspect {
 
             int idx = Arrays.asList(parametersName).indexOf("input");
 
-            if(obj.length > idx) { // parameter exist
+            if(obj.length > idx) {
                 signatureArgs = (String) obj[idx];
-            } // otherwise your parameter does not exist by given name
+            }
 
             LOGGER.info("Method name: {}(), Data to Encrypt: {} ", method.getName(), signatureArgs );
         }
