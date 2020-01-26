@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GetSingleBVNResponse {
+public class VerifySingleBVNResponse {
     private String message;
-    private FullBVNDetail data;
+    private BVNDetail data;
 
     public String getMessage() {
         return message;
@@ -17,11 +17,11 @@ public class GetSingleBVNResponse {
         this.message = message;
     }
 
-    public FullBVNDetail getData() {
+    public BVNDetail getData() {
         return data;
     }
 
-    public void setData(FullBVNDetail data) {
+    public void setData(BVNDetail data) {
         this.data = data;
     }
 }

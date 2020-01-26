@@ -2,6 +2,7 @@ package com.github.enyata;
 
 
 import com.github.enyata.bvnvalidations.BVNValidation;
+import com.github.enyata.config.SecurityConfiguration;
 import com.github.enyata.exceptions.BadRemoteResponseException;
 import com.github.enyata.exceptions.EncryptionException;
 import com.github.enyata.vo.ResetCredential;
@@ -24,6 +25,9 @@ public class BVNValidationTest {
 
     @Autowired
     private BVNValidation bvnValidationService;
+
+    @Autowired
+    private SecurityConfiguration securityConfiguration;
 
     @Test(expected = IllegalArgumentException.class)
     public void testResetHeadersEmptySecretKey(){
@@ -164,6 +168,24 @@ public class BVNValidationTest {
         Assert.assertEquals("SHA256", headers.get("SIGNATURE_METH").get(0));
         Assert.assertEquals("application/json", headers.get("Content-Type").get(0));
         Assert.assertEquals("application/json", headers.get("Accept").get(0));
+
+
+
+        ResetCredential credential = new ResetCredential();
+        credential.setPassword("123");
+        credential.setCode("123");
+        credential.setAesKey("teppp09090909pst");
+        credential.setIvKey("test9000oplkoilo");
+
+        securityConfiguration.setResetCredential(credential);
+        HttpHeaders headers2 =  bvnValidationService.generateHttpAuthHeaders("1223");
+        Assert.assertEquals("MTIz", headers2.get("OrganisationCode").get(0));
+        Assert.assertEquals("1223", headers2.get("Sandbox-Key").get(0));
+        Assert.assertEquals("MTIzOjEyMw==", headers2.get("Authorization").get(0));
+
+        Assert.assertEquals("SHA256", headers2.get("SIGNATURE_METH").get(0));
+        Assert.assertEquals("application/json", headers2.get("Content-Type").get(0));
+        Assert.assertEquals("application/json", headers2.get("Accept").get(0));
 
     }
 }

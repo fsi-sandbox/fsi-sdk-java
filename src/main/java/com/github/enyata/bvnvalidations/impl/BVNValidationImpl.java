@@ -75,15 +75,45 @@ public class BVNValidationImpl implements BVNValidation {
         httpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         httpHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         httpHeaders.set(HttpHeaders.AUTHORIZATION, authHeader);
-
-
-        byte[] sigByte = securityConfiguration.encryptWithoutIV(signatureString);
-        httpHeaders.set("SIGNATURE", StringUtils.toHexString(sigByte));
+        httpHeaders.set("SIGNATURE", securityConfiguration.encryptWithoutIV(signatureString));
         httpHeaders.set("OrganisationCode", Base64.encodeBase64String(username.getBytes()));
         httpHeaders.set("SIGNATURE_METH", signatureMethodHeader);
         httpHeaders.set("Sandbox-Key", sandBoxKey);
 
         return httpHeaders;
 
+    }
+
+    /**
+     * This method generates all the required headers for calls to all subsequent available BVN endpoints.
+     *
+     * @return HttpHeaders
+     * @throws EncryptionException
+     */
+    @Override
+    public HttpHeaders generateHttpAuthHeaders(String sandBoxKey) throws EncryptionException {
+
+        final String signatureMethodHeader = "SHA256";
+        final String username = securityConfiguration.getResetCredential().getCode();
+        final String requestDate = DateFormatter.formatDate(new Date());
+        // Concatenate all three strings into one string
+        final String signatureString = username + requestDate + securityConfiguration.getResetCredential().getPassword();
+
+        // Concatenate the strings in the format username:password
+        final String authString = username + ':' + securityConfiguration.getResetCredential().getPassword();
+
+        // Encode it to Base64 and save it for it will be used later
+        final String authHeader = Base64.encodeBase64String(authString.getBytes());
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        httpHeaders.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        httpHeaders.set(HttpHeaders.AUTHORIZATION, authHeader);
+        httpHeaders.set("SIGNATURE", securityConfiguration.encryptWithoutIV(signatureString));
+        httpHeaders.set("OrganisationCode", Base64.encodeBase64String(username.getBytes()));
+        httpHeaders.set("SIGNATURE_METH", signatureMethodHeader);
+        httpHeaders.set("Sandbox-Key", sandBoxKey);
+
+        return httpHeaders;
     }
 }
