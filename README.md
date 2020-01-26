@@ -1,5 +1,5 @@
 # fsi-nibss-interface
-BVN validation Spring boot library for exposed Interfaces by NIBSS on the FSI Sandbox
+Spring boot library for BVN validation as exposed by NIBSS on the FSI Sandbox. 
 
 ## To use the library, you need to set up the following
 1. Set up maven for your project on your system.
@@ -46,7 +46,8 @@ BVN validation Spring boot library for exposed Interfaces by NIBSS on the FSI Sa
 
 5. add the following properties in your application.properties file to make it work
 ```
-   fsi.sandbox.base.url=https://sandboxapi.fsi.ng
+   fsi.sandbox.base.url=https://sandboxapi.fsi.ng    
+   Note that the base url value will change when moving to production. 
    fsi.sandbox.reset.url=${fsi.sandbox.base.url}/nibss/bvnr/Reset
    fsi.sandbox.get.singlebvn.url=${fsi.sandbox.base.url}/nibss/bvnr/GetSingleBVN
    fsi.sandbox.verify.singlebvn.url=${fsi.sandbox.base.url}/nibss/bvnr/VerifySingleBVN
