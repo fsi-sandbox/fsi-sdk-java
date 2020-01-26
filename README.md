@@ -1,8 +1,9 @@
 # nibss-interfaces
 BVN validation Spring boot library for exposed Interfaces by NIBSS on the FSI Sandbox
-** To use the library, you need to set up the following
+
+## To use the library, you need to set up the following
 1. Set up maven for your project on your system.
-2. Add the following block to your settings.xml file in your .m2 directory (.m2 is usually in the user’s home directory)
+2. Add the following block to your settings.xml file in your .m2 directory in order to download the fsi-nibss-interface from sonatype's repository.  (.m2 directory is usually found in the user’s home directory)
 ```
 <profiles>
     <profile>
@@ -55,9 +56,8 @@ BVN validation Spring boot library for exposed Interfaces by NIBSS on the FSI Sa
 
  ```
 
-##Sample Code using the library
+**Sample Code using the library
 ```java
-package com.splinx.nibss;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.enyata.bvnvalidations.BVNValidation;
@@ -78,7 +78,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 
 
-public class TestCall {
+public class TestApp {
     public static Logger LOGGER = LoggerFactory.getLogger(TestCall.class);
 
     @Autowired
@@ -97,7 +97,7 @@ public class TestCall {
     public void testMethod() throws BadRemoteResponseException, IOException, EncryptionException {
         //this makes a call to the reset method
         String sandBoxKey = "*******";  //replace with your key
-String code = "11111";
+	String code = "11111";
         String resetUrl = "https://sandboxapi.fsi.ng/nibss/bvnr/Reset";
         String getsinglebvnUrl = "https://sandboxapi.fsi.ng//nibss/bvnr/GetSingleBVN";
         HttpHeaders headers =  bvnValidationservice.getResetCredentialsHeaders(sandBoxKey, code);
