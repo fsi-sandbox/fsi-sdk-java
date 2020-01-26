@@ -1,4 +1,4 @@
-# nibss-interfaces
+# fsi-nibss-interface
 BVN validation Spring boot library for exposed Interfaces by NIBSS on the FSI Sandbox
 
 ## To use the library, you need to set up the following
