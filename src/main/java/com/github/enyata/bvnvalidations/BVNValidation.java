@@ -41,4 +41,12 @@ public interface BVNValidation {
      * @throws EncryptionException
      */
     public HttpHeaders generateHttpAuthHeaders(String sandBoxKey, String password, String code) throws EncryptionException;
+
+    /**
+     * This method generates all the required headers for calls to all subsequent available BVN endpoints.
+     * @param sandBoxKey
+     * @return HttpHeaders
+     * @throws EncryptionException
+     */
+    public HttpHeaders generateHttpAuthHeaders(String sandBoxKey) throws EncryptionException;
 }
