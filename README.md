@@ -56,7 +56,7 @@ BVN validation Spring boot library for exposed Interfaces by NIBSS on the FSI Sa
 
  ```
 
-**Sample Code using the library
+## Sample Code using the library
 ```java
 
 import com.fasterxml.jackson.databind.ObjectMapper;
