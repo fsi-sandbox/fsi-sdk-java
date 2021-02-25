@@ -1,10 +1,16 @@
-# fsi-nibss-interface
-Spring boot library for BVN validation as exposed by NIBSS on the FSI Sandbox. 
+# Sandbox Java SDK
+
+Welcome to the FSI Sandbox SDK for Java. See the [fsi-sdk topic](https://github.com/topics/fsi-sdk) for other available SDKs
+
+
+This is a Spring boot library for BVN validation as exposed by NIBSS on the FSI Sandbox. 
 
 ## To use the library, you need to set up the following
+
 1. Set up maven for your project on your system.
 2. Add the following block to your settings.xml file in your .m2 directory in order to download the fsi-nibss-interface from sonatype's repository.  (.m2 directory is usually found in the user’s home directory)
-```
+
+```xml
 <profiles>
     <profile>
         <id>default</id>
@@ -24,8 +30,9 @@ Spring boot library for BVN validation as exposed by NIBSS on the FSI Sandbox.
 </profiles>
 ```
 
-3. In your application's pom file, add this snippet in the distributionManagement tag
-```
+3. In your application's `pom` file, add this snippet in the `distributionManagement` tag
+
+```xml
 <snapshotRepository>
    <id>ossrh</id>
    <name>My Snapshot Repository</name>
@@ -35,7 +42,8 @@ Spring boot library for BVN validation as exposed by NIBSS on the FSI Sandbox.
 ```
 
 4. Add as a dependency to your project
-```
+
+```xml
 <dependency>
    <groupId>com.github.enyata</groupId>
    <artifactId>fsi-nibss-interface</artifactId>
@@ -44,10 +52,10 @@ Spring boot library for BVN validation as exposed by NIBSS on the FSI Sandbox.
 ```
 
 
-5. add the following properties in your application.properties file to make it work
+5. add the following properties in your `application.properties` file to make it work
+
 ```
-   fsi.sandbox.base.url=https://sandboxapi.fsi.ng    
-   Note that the base url value will change when moving to production. 
+   fsi.sandbox.base.url=https://sandboxapi.fsi.ng 
    fsi.sandbox.reset.url=${fsi.sandbox.base.url}/nibss/bvnr/Reset
    fsi.sandbox.get.singlebvn.url=${fsi.sandbox.base.url}/nibss/bvnr/GetSingleBVN
    fsi.sandbox.verify.singlebvn.url=${fsi.sandbox.base.url}/nibss/bvnr/VerifySingleBVN
@@ -57,7 +65,8 @@ Spring boot library for BVN validation as exposed by NIBSS on the FSI Sandbox.
 
  ```
 
-## Sample Code using the library
+## Sample code using the library
+
 ```java
 
 import com.fasterxml.jackson.databind.ObjectMapper;
